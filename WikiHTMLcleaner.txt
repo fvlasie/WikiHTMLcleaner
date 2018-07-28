@@ -1,0 +1,66 @@
+#!perl;
+
+use HTML::TreeBuilder;
+
+my $htmlcode=join"",<>;
+
+utf8::decode $htmlcode;
+
+my $tree = HTML::TreeBuilder->new; # empty tree
+  $tree->parse($htmlcode);
+
+for ($tree->find_by_tag_name('table')){
+    $_->detach() if $_->attr('class')=~"infobox";
+    }
+
+for ($tree->find_by_tag_name('table')){
+    $_->detach() if $_->attr('class')=~"ambox";
+    }
+
+for ($tree->find_by_tag_name('sup')){
+    $_->detach();
+    }
+
+for ($tree->find_by_tag_name('img')){
+    $_->detach();
+    }
+
+for ($tree->find_by_tag_name('div')){
+    $_->detach() if $_->attr('class')=~"thumb";
+    }
+
+for ($tree->find_by_tag_name('div')){
+    $_->detach() if $_->attr('id')=~"toc";
+    }
+
+for ($tree->find_by_tag_name('div')){
+    $_->detach() if $_->attr('class')=~"hatnote";
+    }
+
+for ($tree->find_by_tag_name('div')){
+    $_->detach() if $_->attr('class')=~"shortdescription";
+    }
+
+for ($tree->find_by_tag_name('span')){
+    $_->detach() if $_->attr('style')=~"font-size: small";
+    }
+
+for ($tree->find_by_tag_name('a')){
+    $_->replace_with_content();
+    }
+
+for ($tree->find_by_tag_name('span')){
+    $_->replace_with_content();
+    }
+
+for ($tree->find_by_tag_name('div')){
+    $_->replace_with_content();
+    }
+
+$htmlcode=$tree -> find("body") -> as_HTML;
+
+$htmlcode=~s/^<body>//;
+$htmlcode=~s/<\/body>\z//;
+$htmlcode=~s/<h2> *(See also|Gallery|References|External links) *<\/h2>.*//s;
+
+print $htmlcode;
