@@ -3,7 +3,7 @@ A Perl script for cleaning the Wikipedia specific detritus from the HTML code of
 
 Test with:
 
-`curl "https://en.wikipedia.org/w/index.php?title=Sunmi&action=render" | perl WikiHTMLcleaner.txt | pbcopy`
+`curl "https://en.wikipedia.org/w/index.php?title=Hello&action=render" | perl WikiHTMLcleaner.txt | pbcopy`
 
 Paste into Safari's Develop>Snippet Editor to see the results.
 
