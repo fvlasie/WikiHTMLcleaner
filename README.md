@@ -7,4 +7,4 @@ Test with:
 
 Paste into Safari's Develop>Snippet Editor to see the results.
 
-This is desinged to work with the output of Wkipedia's &action=render URL option which returns only the HTML of the article requested by the title= argument.
+This works with the output of Wkipedia's &action=render URL option which returns only the HTML of the article requested by the title= argument.
