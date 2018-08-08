@@ -14,7 +14,7 @@ for ($tree->find_by_tag_name('table')){
     }
 
 for ($tree->find_by_tag_name('table')){
-    $_->detach() if $_->attr('class')=~"ambox";
+    $_->detach() if $_->attr('class')=~"mbox";
     }
 
 for ($tree->find_by_tag_name('sup')){
