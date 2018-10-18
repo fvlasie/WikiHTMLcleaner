@@ -9,6 +9,8 @@ utf8::decode $htmlcode;
 my $tree = HTML::TreeBuilder->new; # empty tree
   $tree->parse($htmlcode);
 
+$htmlcode=~s/\[edit\]//;
+
 for ($tree->find_by_tag_name('table')){
     $_->detach() if $_->attr('class')=~"infobox";
     }
@@ -17,7 +19,19 @@ for ($tree->find_by_tag_name('table')){
     $_->detach() if $_->attr('class')=~"mbox";
     }
 
+for ($tree->find_by_tag_name('table')){
+    $_->detach() if $_->attr('class')=~"wikitable collapsible";
+    }
+
+for ($tree->find_by_tag_name('table')){
+    $_->detach() if $_->attr('class')=~"navbox";
+    }
+
 for ($tree->find_by_tag_name('sup')){
+    $_->detach();
+    }
+
+for ($tree->find_by_tag_name('small')){
     $_->detach();
     }
 
@@ -57,10 +71,23 @@ for ($tree->find_by_tag_name('div')){
     $_->replace_with_content();
     }
 
+for ($tree->find_by_tag_name('ul')){
+    $_->detach() if $_->attr('class')=~"gallery";
+    }
+
+for ($tree->find_by_tag_name('ol')){
+    $_->detach() if $_->attr('class')=~"references";
+    }
+
+for ($tree->find_by_tag_name('li')){
+    $_->detach() if $_->attr('class')=~"nv-";
+    }
+
 $htmlcode=$tree -> find("body") -> as_HTML;
 
 $htmlcode=~s/^<body>//;
+$htmlcode=~s/\&nbsp\;listen\&nbsp\;//;
 $htmlcode=~s/<\/body>\z//;
-$htmlcode=~s/<h2> *(See also|Gallery|References|External links) *<\/h2>.*//s;
+$htmlcode=~s/<h2> *(See also|Gallery|References|External links|Notes|Image gallery|References and literature|Media gallery) *<\/h2>.*//s;
 
 print $htmlcode;
