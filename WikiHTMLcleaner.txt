@@ -9,7 +9,7 @@ utf8::decode $htmlcode;
 my $tree = HTML::TreeBuilder->new; # empty tree
   $tree->parse($htmlcode);
 
-$htmlcode=~s/\[edit\]//;
+$htmlcode=~s/\[edit\]//g;
 
 for ($tree->find_by_tag_name('table')){
     $_->detach() if $_->attr('class')=~"infobox";
@@ -86,7 +86,7 @@ for ($tree->find_by_tag_name('li')){
 $htmlcode=$tree -> find("body") -> as_HTML;
 
 $htmlcode=~s/^<body>//;
-$htmlcode=~s/\&nbsp\;listen\&nbsp\;//;
+$htmlcode=~s/\&nbsp\;listen\&nbsp\;//g;
 $htmlcode=~s/<\/body>\z//;
 $htmlcode=~s/<h2> *(See also|Gallery|References|External links|Notes|Image gallery|References and literature|Media gallery) *<\/h2>.*//s;
 
