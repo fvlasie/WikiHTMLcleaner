@@ -90,4 +90,7 @@ $htmlcode=~s/\&nbsp\;listen\&nbsp\;//g;
 $htmlcode=~s/<\/body>\z//;
 $htmlcode=~s/<h2> *(See also|Gallery|References|External links|Notes|Image gallery|References and literature|Media gallery) *<\/h2>.*//s;
 
+#Add source info
+$htmlcode .= "<p>Source: https://en.wikipedia.org/wiki/$name";
+
 print $htmlcode;
